@@ -1,0 +1,5 @@
+nasdaq-data-link
+cryptocompare
+statsmodels
+yfinance
+LinearRegression
