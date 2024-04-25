@@ -6,13 +6,20 @@
     <link rel="stylesheet" href="css/wallet.css" />
     <script
       type="text/javascript"
-      src="https://unpkg.com/bsv@1.5.3/bsv.min.js"
+      src="https://unpkg.com/bsv@1.5.6/bsv.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/bsv@1.5.3/bsv-mnemonic.min.js"
     ></script>
     <script
       type="text/javascript"
       src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bsv-wallet@2.4.3/lib/browser/index.min.js
+    "></script>
   </head>
 
   <body>
@@ -21,9 +28,13 @@
         <p id="privText"> </p>
     </div> -->
     <div class="wrapper">
-      <div class="header">Lorem ipsum dom</div>
+      <div class="header">Sample Wallet</div>
       <div class="wallet">
         <div class="information">
+          <div id="mnemonics">
+            <h1>Mnemonics Phrase</h1>
+            <p id="mnemonicsPhrase"></p>
+          </div>
           <div id="pubKey">
             <h1>Public Key</h1>
             <p id="pubText"></p>
@@ -37,6 +48,12 @@
           <div id="qrCode">
             <h1>QR Code</h1>
             <p id="qr"></p>
+          </div>
+          <div id="walletBalance">
+            <h2>Confirmed Balance</h2>
+            <p id="confirmedBalance"></p>
+            <h2>Unconfirmed Balance</h2>
+            <p id="unconfirmedBalance"></p>  
           </div>
         </div>
       </div>
@@ -93,7 +110,6 @@
         </div>
       </div>
     </div>
-
     <script src="js/wallet.js"></script>
   </body>
 </html>

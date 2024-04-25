@@ -13,7 +13,7 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px;
 }
-#pubText,#address{
+#pubText,#address,#mnemonicsPhrase,#balance{
     border: 3px solid black;
     margin-top: 10px;
     height: 100px;
@@ -21,7 +21,14 @@
     background-color: white;
     
 }
-#add {
+#confirmedBalance,#unconfirmedBalance{
+    border: 3px solid black;
+    margin-top: 10px;
+    height: 100px;
+    padding: 2px;
+    background-color: white;
+}
+#add,#mnemonics{
     background-color: #dae5f7;
     padding: 30px;
     font-family: Arial, Helvetica, sans-serif;
@@ -29,11 +36,12 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px;
 }
+
 #qr{
     display: flex;
     justify-content: center;
 }
-#qrCode {
+#qrCode, #walletBalance {
     background-color: #dae5f7;
     margin-bottom: 5px;
     padding: 30px;
@@ -46,6 +54,7 @@
 .qrContainer{
     display: flex;
     justify-content: center;
+    gap: 20px;
 }
 #privKey {
     font-family: Arial, Helvetica, sans-serif;
@@ -58,6 +67,10 @@
 }
 
 #address {
+    font-family: Arial, Helvetica, sans-serif;
+    word-break: break-all;
+}
+#mnemonicsPhrase {
     font-family: Arial, Helvetica, sans-serif;
     word-break: break-all;
 }

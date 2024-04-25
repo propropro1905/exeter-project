@@ -1,38 +1,34 @@
-var privKey = bsv.PrivateKey.fromRandom();
+var mnemonic;
+if (document.querySelector("#mnemonicsPhrase").innerHTML == ""){
+    mnemonic= bsvMnemonic.fromRandom();  
+    document.querySelector("#mnemonicsPhrase").innerHTML = mnemonic.toString()
+    console.log(mnemonic.toString())
+}
+else{
+    mnemonic=bsvMnemonic.fromString(document.querySelector("#mnemonicsPhrase").innerHTML)
+}
+// mnemonic=bsvMnemonic.fromString("guide produce great will anchor absorb slab bone ghost reduce fiction salt")
+// console.log(mnemonic.toString());
+var hdPrivateKey = mnemonic.toHDPrivateKey();
+var privKey = hdPrivateKey.privateKey;
 var pubKey = bsv.PublicKey.fromPrivateKey(privKey);
 var address = bsv.Address.fromPrivateKey(privKey);
-
-
-// var p = document.querySelector("#privText");
-// p.innerHTML = privKey.toString();
-
-var y = document.querySelector("#pubText");
-y.innerHTML = pubKey.toString();
-var z = document.querySelector("#address");
-z.innerHTML = address.toString();
+document.querySelector("#pubText").innerHTML = pubKey.toString();
+document.querySelector("#address").innerHTML = address.toString();
+var confirmedBalance = document.querySelector("#confirmedBalance");
+var unconfirmedBalance = document.querySelector("#unconfirmedBalance");
+fetch("https://api.whatsonchain.com/v1/bsv/main/address/"+ address +"/balance")
+.then(response => response.json())
+.then(data => {
+    confirmedBalance.innerHTML = data.confirmed;
+    unconfirmedBalance.innerHTML = data.unconfirmed;
+    // console.log(data.toString())
+}) ;
 
 
 var addressCode = 'bitcoinsv:' + address;
-console.log(addressCode)
+// console.log(addressCode)
 new QRCode(document.getElementById("qr"), addressCode);
-// var canvas=document.getElementsByTagName("canvas")[0];
-// console.log(canvas);
-// canvas.width=100;
-// canvas.height=100;
-
-
-// var config = {
-//     method: 'get',
-//     url: "https://api.whatsonchain.com/v1/bsv/main/exchangerate",
-// };
-
-// axios(config)
-//     .then((response) => {
-//         let data = JSON.stringify(response.data);
-//         let p = document.getElementById("er");
-//         p.innerHTML = data;
-//     })
-
 
 var btc = document.getElementById("bitcoin");
 var ltc = document.getElementById("litecoin");

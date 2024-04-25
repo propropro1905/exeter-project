@@ -60,14 +60,13 @@ var cwp_nmsp = {};
 		innerContainerAcross.className = "cwp_q_across_container";
 		innerContainerAcross.setAttribute("id", "cwp_q_across_container");
 		container.appendChild(innerContainerAcross);
-		var h5ElementDown = document.createElement("h5");
-		h5ElementDown.className = "cwp_h5_q";
-		h5ElementDown.appendChild(document.createTextNode("Down"));
-		container.appendChild(h5ElementDown);
-		var innerContainerDown = document.createElement("div");
-		innerContainerDown.className = "cwp_q_down_container";
-		innerContainerDown.setAttribute("id", "cwp_q_down_container");
-		container.appendChild(innerContainerDown);
+		// var h5ElementDown = document.createElement("h5");
+		// h5ElementDown.className = "cwp_h5_q";
+		// h5ElementDown.appendChild(document.createTextNode("Down"));
+		// container.appendChild(h5ElementDown);
+		// var innerContainerDown = document.createElement("div");
+		// innerContainerDown.classNa/ibute("id", "cwp_q_down_container");
+		// container.appendChild(innerContainerDown);
 		docFrag.appendChild(container);
 
 		container = document.createElement("div");
@@ -100,12 +99,12 @@ var cwp_nmsp = {};
 				console.error("Error creating puzzle for id -> "+element.getAttribute("id")+" : questions_across property of options must be set for demoMode value equal to false");
 				return;
 			}
-			if(options.questions_down) {
-				namespace.CWP_QUESTIONS_DOWN = options.questions_down;
-			} else {
-				console.error("Error creating puzzle for id -> "+element.getAttribute("id")+" : questions_down property of options must be set for demoMode value equal to false");
-				return;
-			}
+			// if(options.questions_down) {
+			// 	namespace.CWP_QUESTIONS_DOWN = options.questions_down;
+			// } else {
+			// 	console.error("Error creating puzzle for id -> "+element.getAttribute("id")+" : questions_down property of options must be set for demoMode value equal to false");
+			// 	return;
+			// }
 		}
 		namespace.redrawLayout(element);
 		namespace.bindEvents();
@@ -202,10 +201,10 @@ var cwp_nmsp = {};
 	namespace.redrawQuestions = function() {
 
 		var qContainerAcross = document.getElementById("cwp_q_across_container");
-		var qContainerDown = document.getElementById("cwp_q_down_container");
+		// var qContainerDown = document.getElementById("cwp_q_down_container");
 
 		var docFragAcross = document.createDocumentFragment();
-		var docFragDown = document.createDocumentFragment();
+		// var docFragDown = document.createDocumentFragment();
 
 		var brElement = document.createElement("br");
 		var textNode = null;
@@ -213,9 +212,9 @@ var cwp_nmsp = {};
 		spanElement.className = "cwp_q_span";
 
 		var questionsAcross = namespace.CWP_QUESTIONS_ACROSS;
-		var questionsDown = namespace.CWP_QUESTIONS_DOWN;
+		// var questionsDown = namespace.CWP_QUESTIONS_DOWN;
 		var qAcrossLength = namespace.CWP_QUESTIONS_ACROSS.length;
-		var qDownLength = namespace.CWP_QUESTIONS_DOWN.length;
+		// var qDownLength = namespace.CWP_QUESTIONS_DOWN.length;
 
 		for(var i=0;i<qAcrossLength;i++) {
 			docFragAcross.appendChild(brElement.cloneNode(false));
@@ -226,17 +225,17 @@ var cwp_nmsp = {};
 			spanElement.appendChild(textNode);
 			docFragAcross.appendChild(spanElement.cloneNode(true));
 		}
-		for(var j=0;j<qDownLength;j++) {
-			docFragDown.appendChild(brElement.cloneNode(false));
-			textNode = document.createTextNode(questionsDown[j]);
-			if(spanElement.hasChildNodes()) {
-				spanElement.removeChild(spanElement.firstChild);
-			}
-			spanElement.appendChild(textNode);
-			docFragDown.appendChild(spanElement.cloneNode(true));
-		}
+		// for(var j=0;j<qDownLength;j++) {
+		// 	docFragDown.appendChild(brElement.cloneNode(false));
+		// 	textNode = document.createTextNode(questionsDown[j]);
+		// 	if(spanElement.hasChildNodes()) {
+		// 		spanElement.removeChild(spanElement.firstChild);
+		// 	}
+		// 	spanElement.appendChild(textNode);
+		// 	docFragDown.appendChild(spanElement.cloneNode(true));
+		// }
 		qContainerAcross.appendChild(docFragAcross);
-		qContainerDown.appendChild(docFragDown);
+		// qContainerDown.appendChild(docFragDown);
 	};
 
 	namespace.redrawPuzzle = function(checkSolutionMode) {
