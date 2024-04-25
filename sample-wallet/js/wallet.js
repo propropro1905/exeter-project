@@ -1,35 +1,46 @@
-var mnemonic;
-if (document.querySelector("#mnemonicsPhrase").innerHTML == ""){
-    mnemonic= bsvMnemonic.fromRandom();  
-    document.querySelector("#mnemonicsPhrase").innerHTML = mnemonic.toString()
-    console.log(mnemonic.toString())
+var mnemonic=bsvMnemonic.fromRandom();
+// if (document.querySelector("#mnemonicsPhrase").innerHTML == ""){
+//     mnemonic= bsvMnemonic.fromRandom();  
+//     // document.querySelector("#mnemonicsPhrase") = mnemonic.toString()
+//     console.log(mnemonic.toString())
+// }
+// else{
+//     mnemonic=bsvMnemonic.fromString(document.querySelector("#mnemonicsPhrase").innerHTML)
+// }
+function generateFromMnemonics(mnemonic){
+    var hdPrivateKey = mnemonic.toHDPrivateKey();
+    var privKey = hdPrivateKey.privateKey;
+    var pubKey = bsv.PublicKey.fromPrivateKey(privKey);
+    var address = bsv.Address.fromPrivateKey(privKey);
+    document.querySelector("#pubText").innerHTML = pubKey.toString();
+    document.querySelector("#address").innerHTML = address.toString();
+    var confirmedBalance = document.querySelector("#confirmedBalance");
+    var unconfirmedBalance = document.querySelector("#unconfirmedBalance");
+    fetch("https://api.whatsonchain.com/v1/bsv/main/address/"+ address +"/balance")
+    .then(response => response.json())
+    .then(data => {
+        confirmedBalance.innerHTML = data.confirmed;
+        unconfirmedBalance.innerHTML = data.unconfirmed;
+    }) ;
+
+    //generate qrcode
+    var addressCode = 'bitcoinsv:' + address;
+    var qrCode=document.getElementById("qr");
+    console.log(qrCode)
+    if (qrCode.hasChildNodes()){
+        qrCode.innerHTML="";
+    }
+    new QRCode(document.getElementById("qr"), addressCode);    
 }
-else{
-    mnemonic=bsvMnemonic.fromString(document.querySelector("#mnemonicsPhrase").innerHTML)
+var showMnemonics=()=>{
+    document.querySelector("#mnemonicsPhrase").innerHTML = mnemonic.toString();
+
 }
-// mnemonic=bsvMnemonic.fromString("guide produce great will anchor absorb slab bone ghost reduce fiction salt")
-// console.log(mnemonic.toString());
-var hdPrivateKey = mnemonic.toHDPrivateKey();
-var privKey = hdPrivateKey.privateKey;
-var pubKey = bsv.PublicKey.fromPrivateKey(privKey);
-var address = bsv.Address.fromPrivateKey(privKey);
-document.querySelector("#pubText").innerHTML = pubKey.toString();
-document.querySelector("#address").innerHTML = address.toString();
-var confirmedBalance = document.querySelector("#confirmedBalance");
-var unconfirmedBalance = document.querySelector("#unconfirmedBalance");
-fetch("https://api.whatsonchain.com/v1/bsv/main/address/"+ address +"/balance")
-.then(response => response.json())
-.then(data => {
-    confirmedBalance.innerHTML = data.confirmed;
-    unconfirmedBalance.innerHTML = data.unconfirmed;
-    // console.log(data.toString())
-}) ;
-
-
-var addressCode = 'bitcoinsv:' + address;
-// console.log(addressCode)
-new QRCode(document.getElementById("qr"), addressCode);
-
+var generateMnemonics=()=>{
+    mnemonic=bsvMnemonic.fromString(document.querySelector("#mnemonicsPhrase").innerHTML);
+    generateFromMnemonics(mnemonic);
+}
+generateFromMnemonics(mnemonic)
 var btc = document.getElementById("bitcoin");
 var ltc = document.getElementById("litecoin");
 var eth = document.getElementById("ethereum");

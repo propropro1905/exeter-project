@@ -5,13 +5,16 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#pubKey {
+#pubKey,#add,#mnemonics {
     background-color: #dae5f7;
     padding: 30px;
     font-family: Arial, Helvetica, sans-serif;
     flex-basis: 50%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px;
+    justify-content: space-between;
+    flex-direction: column;
+    display: flex;
 }
 #pubText,#address,#mnemonicsPhrase,#balance{
     border: 3px solid black;
@@ -19,6 +22,10 @@
     height: 100px;
     padding: 2px;
     background-color: white;
+
+}
+#mnemonicsPhrase{
+    resize: none;
     
 }
 #confirmedBalance,#unconfirmedBalance{
@@ -120,7 +127,7 @@ body{
     display: flex;
     flex-direction: column;
 }
-.wallet{
+.wallet,.mnemonicWrapper{
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -145,4 +152,23 @@ h1{
     background-color: pink;
     margin: 20px;
     border-radius: 20px;
+}
+.buttonWrapper{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+.buttonWrapper button{
+    width: 200px;
+    height: 30px;
+}
+.mnemonicWrapper{
+    width: 500px;
+    margin: 0 auto;
+}
+#mnemonics span {
+    background-color: rgba(180,180,180,0.3);
+    padding: 10px;
+    border-radius: 5px;
 }
